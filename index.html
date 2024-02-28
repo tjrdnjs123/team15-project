@@ -85,7 +85,11 @@
               type="text"
               placeholder="당신의 오늘 할 일은?"
             />
-            <button id="micBtn" onclick="record()"></button>
+            <div class="mic-btns">
+              <button id="fakeBtn"></button>
+              <button id="micBtn" onclick="record()"></button>
+              <button id="stopBtn"></button>
+            </div>
           </div>
           <!--모달창 푸터 : 완료 버튼이 있고 누르면 할 일이 추가된다.-->
           <div class="modal-footer">
@@ -104,6 +108,10 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
-    <script src="main.js"></script>
+    <script src="./scripts/addTask.js"></script>
+    <script src="./scripts/completeTask.js"></script>
+    <script src="./scripts/delTask.js"></script>
+    <script src="./scripts/editTask.js"></script>
+    <script src="./scripts/record.js"></script>
   </body>
 </html>
