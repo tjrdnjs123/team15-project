@@ -37,3 +37,5 @@ recognition.addEventListener("result", (event) => {
   console.log(transcript);
   inputTask.value = transcript;
 });
+
+// 테스트
