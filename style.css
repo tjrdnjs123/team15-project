@@ -111,7 +111,7 @@ button {
   border: none;
   background-color: transparent;
 }
-/* fakeBtn, micBtn, stopBtn의부모 */
+/* fakeBtn, micBtn, stopBtn 의부모 */
 .mic-btns {
   position: relative;
 }
