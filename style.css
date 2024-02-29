@@ -87,7 +87,6 @@ body {
   width: 20px;
   height: 20px;
 }
-
 /*하단 추가 버튼 공간에 대한 속성*/
 .input-area {
   flex-grow: 0;
@@ -100,6 +99,18 @@ body {
   background-image: url("./img/addIcon.svg");
   background-repeat: no-repeat;
 }
+/* 새로고침 버튼 */
+#refresh-btn {
+  width: 30px;
+  height: 30px;
+  background-image: url("./img/refreshIcon.svg");
+  background-repeat: no-repeat;
+}
+/* 마우스 호버시 보여지는 속성 */
+#refresh-btn:hover {
+  transform: rotate(90deg);
+  transition: 0.25s;
+}
 
 /*모달창*/
 .modal-body {
@@ -111,42 +122,14 @@ button {
   border: none;
   background-color: transparent;
 }
-/* fakeBtn, micBtn, stopBtn 의부모 */
-.mic-btns {
-  position: relative;
-}
-/* fakeBtn */
-.mic-btns > :nth-child(1) {
-  z-index: 2;
-  position: absolute;
+#micBtn {
   margin-left: 15px;
   width: 30px;
   height: 30px;
   background-image: url("./img/micIcon.svg");
   background-repeat: no-repeat;
 }
-/* micBtn */
-.mic-btns > :nth-child(2) {
-  z-index: 1;
-  position: absolute;
-  margin-left: 15px;
-  width: 30px;
-  height: 30px;
-  background-image: url("./img/recordIcon.svg");
-  background-repeat: no-repeat;
-  display: none;
-}
-/* stopBtn */
-.mic-btns > :nth-child(3) {
-  z-index: 0;
-  position: absolute;
-  margin-left: 15px;
-  width: 30px;
-  height: 30px;
-  background-image: url("./img/pauseIcon.svg");
-  background-repeat: no-repeat;
-  display: none;
-}
+/*할 일 추가 버튼과 완료 버튼 생김새 정의 (체크표시)*/
 .completeBtns {
   width: 30px;
   height: 30px;
@@ -156,4 +139,8 @@ button {
 .modal-footer {
   display: flex;
   justify-content: center;
+}
+
+.hide {
+  display: none;
 }

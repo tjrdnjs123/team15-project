@@ -1,77 +1,122 @@
-let recognition = new webkitSpeechRecognition();
-recognition.lang = "ko-KR";
-let inputTask = document.getElementById("inputTask");
-const fakeBtn = document.getElementById("fakeBtn");
-const micBtn = document.getElementById("micBtn");
-const stopBtn = document.getElementById("stopBtn");
-const btnClose = document.getElementById("btn-close");
+const record = () => {
+  console.log("음성 인식 준비");
+  recordStartBtnCreate();
+};
 
-/* 마이크버튼 클릭: 마이크 버튼사라짐 -> 녹음버튼나타남 */
-fakeBtn.addEventListener("click", () => {
-  fakeBtn.style.display = "none";
-  micBtn.style.display = "block";
-});
+const recordStartBtnCreate = () => {
+  // 기존의 hide 클래스 추가
+  console.log("recordStartBtn 생성 및 추가");
+  const micBtn = document.getElementById("micBtn");
+  if (micBtn) {
+    micBtn.classList.add("hide");
+  }
 
-/* 녹음버튼 클릭: 녹음버튼 사라짐 -> 중지버튼 나타남 */
-const record = (event) => {
-  micBtn.style.display = "none"; // 녹음버튼 사라짐
-  stopBtn.style.display = "block"; // 중지버튼 나타남
+  // recordStartBtn 생성
+  const recordStartBtn = document.createElement("button");
+  recordStartBtn.id = "recordStartBtn";
+  recordStartBtn.onclick = function () {
+    recordStart();
+    recordStopBtnCreate();
+    // 여기에 클릭 시 실행할 로직을 추가할 수 있습니다.
+  };
 
-  recognition.start();
-  console.log("녹음시작");
-  inputTask.value = "";
+  // 녹음 중 이미지 생성
+  const recordingImage = document.createElement("img");
+  recordingImage.src =
+    "https://c8.alamy.com/zooms/9/f7c24786b30248759d7e27f15b884a20/2c310gh.jpg"; // 녹음 중 이미지 URL로 변경
+  recordingImage.alt = "Recording Image";
+  recordingImage.style.width = "50px"; // 원하는 크기로 조절
+  recordingImage.style.height = "50px"; // 원하는 크기로 조절
+
+  // recordStartBtn 안에 녹음 중 이미지 추가
+  recordStartBtn.appendChild(recordingImage);
+
+  // 모달 바디에 recordStartBtn 추가
+  document.querySelector(".modal-body").appendChild(recordStartBtn);
+};
+
+const recordStopBtnCreate = () => {
+  console.log("recordStopBtn 생성 및 추가");
+  const recordStartBtn = document.getElementById("recordStartBtn");
+  if (recordStartBtn) {
+    recordStartBtn.classList.add("hide");
+  }
+
+  // recordStopBtn 생성
+  const recordStopBtn = document.createElement("button");
+  recordStopBtn.id = "recordStopBtn";
+  recordStopBtn.onclick = function () {
+    console.log("recordStopBtn 클릭되었습니다.");
+    recordStop();
+    modalInit();
+  };
+
+  // 녹음 중지 이미지 생성
+  const recordingStopImage = document.createElement("img");
+  recordingStopImage.src =
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEBU-RQIgLzxk5ibJZ57CcN1qhVycdQ_0H-w&usqp=CAU"; // 녹음 중 이미지 URL로 변경
+  recordingStopImage.alt = "Recording Image";
+  recordingStopImage.style.width = "50px"; //
+  recordingStopImage.style.height = "50px"; //
+
+  // recordStopBtn 안에 녹음 중 이미지 추가
+  recordStopBtn.appendChild(recordingStopImage);
+
+  // 모달 바디에 recordStopBtn 추가
+  document.querySelector(".modal-body").appendChild(recordStopBtn);
+};
+
+const modalInit = () => {
+  const recordStartBtn = document.getElementById("recordStartBtn");
+  const recordStopBtn = document.getElementById("recordStopBtn");
+
+  micBtn.classList.remove("hide");
+  if (recordStartBtn) {
+    recordStartBtn.remove();
+  }
+  if (recordStopBtn) {
+    recordStopBtn.remove();
+  }
+};
+
+const modalInput = document.getElementById("modalInput");
+
+const availabilityFunc = () => {
+  //현재 SpeechRecognition을 지원하는 크롬 버전과 webkit 형태로 제공되는 버전이 있으므로 둘 중 해당하는 생성자를 호출한다.
+  recognition = new webkitSpeechRecognition() || new SpeechRecognition();
+  recognition.lang = "ko"; // 음성인식에 사용되고 반환될 언어를 설정한다.
+  recognition.maxAlternatives = 5; //음성 인식결과를 5개 까지 보여준다.
+
+  if (!recognition) {
+    alert("현재 브라우저는 사용이 불가능합니다.");
+  }
+};
+
+const recordStart = () => {
+  console.log("시작");
 
   recognition.addEventListener("speechstart", () => {
-    console.log("인식중");
+    console.log("인식");
   });
+
+  //음성인식이 끝까지 이루어지면 중단된다.
   recognition.addEventListener("speechend", () => {
-    console.log("인식끝");
-  });
-  recognition.addEventListener("result", (event) => {
-    console.log(event);
-    const transcript = event.results[0][0].transcript; // 녹음값 접근
-    console.log(transcript);
-    inputTask.value = transcript; // 녹음값 input value로 반환
-    if (inputTask.value) {
-      fakeBtn.style.display = "block"; // 마이크버튼 나타남
-      stopBtn.style.display = "none"; // 중단버튼 사라짐
-    }
+    console.log("인식2");
+    modalInit();
   });
 
-  /* 녹음이 끝났을 때 입력창이 비어있으면 원상복귀 */
-  recognition.addEventListener("end", () => {
-    if (!inputTask.value) {
-      fakeBtn.style.display = "block"; // 마이크버튼 나타남
-      stopBtn.style.display = "none"; // 중단버튼 사라짐
-    }
+  //음성인식 결과를 반환
+  // SpeechRecognitionResult 에 담겨서 반환된다.
+  recognition.addEventListener("result", (e) => {
+    modalInput.value = e.results[0][0].transcript;
   });
+
+  recognition.start(); //음성인식을 시작
 };
-/* 중지버튼 클릭시 녹음이 중지된다 */
-stopBtn.addEventListener("click", () => {
-  console.log("녹음중지");
-  recognition.stop();
-  //   recognition.abort(); 논의 후 결정
-  stopBtn.style.display = "none"; // 중지버튼 사라짐
-  fakeBtn.style.display = "block"; // 마이크버튼 나타남
-});
 
-btnClose.addEventListener("click", () => {
-  inputTask.value = "";
+const recordStop = () => {
+  console.log("종료");
+  recognition.stop(); // 음성인식을 중단하고 중단까지의 결과를 반환
+};
 
-  fakeBtn.style.display = "block";
-  stopBtn.style.display = "none";
-  micBtn.style.display = "none";
-});
-// 시나리오1. 3개의 버튼을 만들어 기능을 각각넣는다
-// s1.1-1. 페이크이미지용 버튼을 만든다 V
-// s1.1-2. CSS로 위에 겹치게 둔다 V
-// s1.1-3. fakeBtn을 끌어온다 V
-// s1.1-4. 클릭시 display:none처리 V
-// s1.1-5. 스탑기능 구현 V
-// s1.1-6. 녹음의 상태가 끝나도 마이크로 돌아와야한다 V
-// s1.1-7. input값이 제출될 때 동시에 초기값설정. X버튼 클릭시는 그냥 초기값
-// s1.1-8. 하나의 함수 안에 동작하게끔하여 음성이 기록되면 input창을 제외하고 모두 초기화되어야한다
-
-// 해결할 오류1. 모달내 상태를 변경하고 제출, X버튼 누르고 다시 addtask버튼을 클릭하면 초기화 되지않았다.
-
-// s2.1.1. 버튼클릭시 이미지가 사라진다 -> 그자리에 새로운 이미지를 생성한다
+window.addEventListener("load", availabilityFunc);
