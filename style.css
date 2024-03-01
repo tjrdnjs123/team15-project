@@ -66,6 +66,7 @@ body {
   display: flex;
   flex-direction: row;
 }
+/* 렌더상의 데드라인박스 */
 #dead {
   display: flex;
 }
@@ -145,6 +146,7 @@ button {
   background-image: url("./img/micIcon.svg");
   background-repeat: no-repeat;
 }
+/* 데드라인 입력창 */
 #deadline-container {
   border: 1px solid black;
   display: flex;
