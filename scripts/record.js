@@ -82,8 +82,6 @@ const recordIconInit = () => {
 
 document.querySelector(".btn-close").addEventListener("click", recordIconInit);
 
-
-
 const availabilityFunc = () => {
   //현재 SpeechRecognition을 지원하는 크롬 버전과 webkit 형태로 제공되는 버전이 있으므로 둘 중 해당하는 생성자를 호출한다.
   recognition = new webkitSpeechRecognition() || new SpeechRecognition();
@@ -126,8 +124,3 @@ const recordStop = () => {
 window.addEventListener("load", () => {
   availabilityFunc();
 });
-
-
-
-
-
