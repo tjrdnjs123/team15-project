@@ -15,33 +15,20 @@
   <body>
     <div class="container">
       <div class="title-area">
+        <button id="micAddOnBtn">
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN4oSAZkVmHTQYXyhxfGRrust8sd_ulla67A&usqp=CAU"
+            alt="이미지 버튼"
+          />
+        </button>
         <h1>To do List</h1>
       </div>
-      <!--할 일들이 저장되는 task area 공간-->
-      <div id="task-area-board" class="task-area">
-        <!--할 일 개별인 task 태그. 완료체크박스,테스크명, 수정삭제버튼-->
-        <!--div class="task">
-                <div class = "wrap1">
-                    <button id = "task-done-btn" onclick= "completeTask()"></button>
-                    <div id = "task-name">청소하기!</div>
-                </div>
-                <div class = "wrap2">
-                    <button id = "task-edit-btn" onclick = "editTask()"></button>
-                    <button id = "task-delete-btn" onclick = "delTask()"></button>
-                </div>
-            </!--div>
-
-            <div!-- class="task">
-                <div class = "wrap1">
-                    <button id = "task-done-btn"></button>
-                    <div id = "task-name">강아지 산책시키고 병원가기</div>
-                </div>
-                <div class = "wrap2">
-                    <button id = "task-edit-btn"></button>
-                    <button id = "task-delete-btn"></button>
-                </div>
-            </div!-->
+      <div class="taskStatus">
+        <button onclick="render(`doing`)">진행중</button>
+        <button onclick="render(`done`)">진행완료</button>
       </div>
+      <!--할 일들이 저장되는 task area 공간-->
+      <div id="task-area-board" class="task-area"></div>
       <!--맨 밑에 있는 할 일 추가 버튼-->
       <div class="input-area">
         <!-- Button trigger modal -->
@@ -50,8 +37,9 @@
           type="button"
           data-bs-toggle="modal"
           data-bs-target="#exampleModal"
-        ></button>
-        <button id="refresh-btn" onclick="taskReset()"></button>
+        >
+          <button id="refresh-btn" onclick="taskReset()"></button>
+        </button>
       </div>
     </div>
     <!-- Modal -->
@@ -75,7 +63,6 @@
             <button
               type="button"
               class="btn-close"
-              onclick="modalInit()"
               data-bs-dismiss="modal"
               aria-label="Close"
             ></button>
@@ -87,12 +74,57 @@
               type="text"
               placeholder="당신의 오늘 할 일은?"
             />
-            <button id="micBtn" onclick="record()"></button>
+            <button id="micBtn"></button>
+          </div>
+          <!-- 데드라인 콘테이너 : 시간, 분을 설정할 수 있다.  -->
+          <div id="deadline-container">
+            <span>데드라인</span>
+            <input id="time-picker" type="time" />
           </div>
           <!--모달창 푸터 : 완료 버튼이 있고 누르면 할 일이 추가된다.-->
           <div class="modal-footer">
             <button
               id="completeBtn"
+              type="button"
+              class="completeBtns"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!------- 수정용 모달 구분선 ------->
+
+    <!-- Modal -->
+    <!--모달 전체를 포함하는 어두운 창-->
+    <div
+      class="modal fade"
+      id="editModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <!--모달 전체 창 : 중앙에 배치하기-->
+      <div class="modal-dialog modal-dialog-centered">
+        <!--모달 안에 창-->
+        <div class="modal-content">
+          <!--모달창 헤더 : 모달창 전체 제목과 엑스 버튼이 있음-->
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">✎ 할 일 수정하기</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <!--모달창 바디 : 인풋창과 마이크 버튼이 있다.-->
+          <div class="modal-body" id="editInput"></div>
+          <!--모달창 푸터 : 완료 버튼이 있고 누르면 할 일이 추가된다.-->
+          <div class="modal-footer">
+            <button
+              id="editBtn"
               type="button"
               class="completeBtns"
               data-bs-dismiss="modal"
@@ -113,5 +145,8 @@
     <script src="./scripts/record.js"></script>
     <script src="./scripts/render.js"></script>
     <script src="./scripts/taskReset.js"></script>
+    <script src="./scripts/modalInit.js"></script>
+    <script src="./scripts/recordOnBtn.js"></script>
+    <script src="./scripts/deadLine.js"></script>
   </body>
 </html>
