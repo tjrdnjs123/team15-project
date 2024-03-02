@@ -20,7 +20,7 @@ const addTask = (event) => {
   let task = {
     id: randomIDGenerate(),
     taskContent: taskInput.value,
-    deadlineTime: getTime(),
+    deadlineTime: timePicker.value,
     isComplete: false,
   };
 

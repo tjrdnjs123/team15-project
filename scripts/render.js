@@ -42,7 +42,7 @@ const render = (mode) => {
               <div id = "dead" style = "display : ${
                 taskList[i].deadlineTime ? "block" : "none"
               } " >
-                   <div class = "task-doing-time">데드라인 ${
+                   <div class = "task-doing-time">데드라인: ${
                      taskList[i].deadlineTime
                    }
                 </div>
