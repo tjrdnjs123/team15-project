@@ -12,7 +12,15 @@ function deleteTask(taskId) {
       break;
     }
   }
+  const matchingTask = taskList.find(
+    (item) => item.taskContent.replace(/\s/g, "") === taskId
+  );
+
+  if (matchingTask) {
+    currentID = matchingTask.id;
+    deleteTask(currentID)
+  }
   console.log("todolist", JSON.stringify(taskList));
-  render(renderStatus);
   ProgressTask();
+  render(renderStatus);
 }
