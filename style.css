@@ -17,16 +17,16 @@
 }
 
 .cloudyBg {
-  background-image: url('./img/cloudybackground.jpg');
+  background-image: url("./img/cloudybackground.jpg");
 }
 .rainyBg {
-  background-image: url('./img/rainybackground.jpg');
+  background-image: url("./img/rainybackground.jpg");
 }
 .sunnyBg {
-  background-image: url('./img/sunnybackground.jpg');
+  background-image: url("./img/sunnybackground.jpg");
 }
 .snowyBg {
-  background-image: url('./img/snowybackground.jpg');
+  background-image: url("./img/snowybackground.jpg");
 }
 body {
   display: flex;
@@ -41,9 +41,6 @@ body {
   background-size: cover;
   font-family: "joa";
 }
-
-
-
 
 /*전체 컨테이너에 대한 속성*/
 .container {
@@ -93,26 +90,24 @@ body {
   justify-content: center;
 }
 .cloudy {
-  background-image: url('./img/cloudyIcon.png');
+  background-image: url("./img/cloudyIcon.png");
 }
 .rainy {
-  background-image: url('./img/rainyIcon.png');
+  background-image: url("./img/rainyIcon.png");
 }
 .sunny {
-  background-image: url('./img/sunnyIcon.png');
+  background-image: url("./img/sunnyIcon.png");
 }
 .snowy {
-  background-image: url('./img/snowyIcon.png');
+  background-image: url("./img/snowyIcon.png");
 }
-#current-weather{
-  
+#current-weather {
   background-repeat: no-repeat;
   background-size: cover;
-  width : 30px;
-  height : 30px;
-  margin-left : 5px;
+  width: 30px;
+  height: 30px;
+  margin-left: 5px;
 }
-
 
 /*컨테이너의 -2. 진행중, 진행완료 div 박스*/
 .taskStatus {
@@ -124,15 +119,25 @@ body {
 }
 /*메뉴바*/
 #underline {
-  position : absolute;
-  width : 50px;
-  height : 4px;
-  background-color: black;
+  position: absolute;
+  width: 52px;
+  height: 4px;
+  background-color: rgba(6, 6, 6, 0.5);
 }
-
+.completeRatio {
+  display:
+  width: 50px;
+  height: 4px;
+  margin-right: 30px;
+}
+.statusWrap1{
+  font-size: 18px;
+}
 .statusWrap2 {
+  width:16%;
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
 }
 
 /*해야할 일이 쌓이는 공간에 대한 속성*/
@@ -223,7 +228,7 @@ body {
 
 /*하단 추가 버튼 공간에 대한 속성*/
 .input-area {
-  display : flex;
+  display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
@@ -237,28 +242,29 @@ body {
   background-image: url("./img/addIcon.svg");
   background-repeat: no-repeat;
 }
-#task-add-btn:hover{
-  transition : all 0.2s linear;
-  transform: scale(1.4)
+#task-add-btn:hover {
+  transition: all 0.2s linear;
+  transform: scale(1.4);
 }
-
 
 #micAddOnBtn img {
   width: 35px; /* 원하는 크기로 조절 */
   height: auto; /* 비율을 유지하면서 크기 조절 */
 }
-#micAddOnBtn:hover{
-  transition : all 0.2s linear;
-  transform : scale(1.4);
+#micAddOnBtn:hover {
+  transition: all 0.2s linear;
+  transform: scale(1.4);
 }
-
 
 /* 새로고침 버튼 */
 #refresh-btn {
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   background-image: url("./img/refreshIcon.svg");
   background-repeat: no-repeat;
+  margin-right: 10px;
+  padding-bottom: 10px ;
+
 }
 /* 마우스 호버시 보여지는 속성 */
 #refresh-btn:hover {
@@ -326,20 +332,60 @@ button {
   display: none;
 }
 
-
-
 /*태블릿 사이즈*/
-@media (min-width : 600px) and (max-width : 992px) {
+@media (min-width: 600px) and (max-width: 992px) {
   .container {
-    width : 65%;
+    width: 65%;
+  }
+  .statusWrap2 {
+    width:18%;
+
+  }
+  #current-date {
+    font-size: 40px;
+    margin-right: 0.2em;
+  }
+  #current-year {
+    font-size: 15px;
+  }
+  #current-month {
+    font-size: 15px;
+  }
+  .date-and-weather-area {
+    font-size: 20px;
+
   }
 }
 /*데스트탑 사이즈*/
-@media (min-width : 992px) {
+@media (min-width: 992px) {
   .container {
-    width : 45%;
+    width: 45%;
+  }
+  .statusWrap2 {
+    width:15%;
+
+  }
+  #refresh-btn {
+
+    margin-right: 15px;
+    padding-bottom: 10px;
+  }
+  #current-date {
+    font-size: 50px;
+    margin-right: 0.2em;
+  }
+  #current-year {
+    font-size: 17px;
+  }
+  #current-month {
+    font-size: 17px;
+  }
+  .date-and-weather-area {
+    font-size: 30px;
+
   }
 }
+
 
 /*수정 모달창*/
 #editInput {
@@ -347,13 +393,13 @@ button {
   align-items: center;
 }
 #changedInput {
-  width : 35%;
+  width: 35%;
 }
 #changed-deadline-container {
-  width : 65%;
+  width: 65%;
 }
 #changedDateTimePicker {
-  width : 180px;
+  width: 180px;
 }
 
 /*스크롤바*/
@@ -361,43 +407,49 @@ button {
 /*스크롤바 막대*/
 ::-webkit-scrollbar {
   width: 20px;
-  height : 3px;
+  height: 3px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #4ECB71;
+  background: #a0a0a5;
+  border-radius: 12px 12px 12px 12px;
   border-radius: 12px 12px 12px 12px;
   background-clip: padding-box;
   border: 7px solid transparent;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background-color:#D9D9D9;
+  background-color: #babac0;
 }
-
+/* 스크롤이 움직이는 뒷 배경 */
+::-webkit-scrollbar-track {
+  background-color: rgba(225, 232, 243, 0.1);
+  border-radius: 10px;
+}
+*/
 
 /*마이크 디폴트 버튼*/
 #micAddOnBtn {
-  width : 50px;
-  height : 50px;
+  width: 50px;
+  height: 50px;
   background-image: url("./img/micDefault.svg");
   background-repeat: no-repeat;
-  background-size : contain;
+  background-size: contain;
 }
 /*마이크 시작할 때 버튼*/
 #recordStartBtn {
-  width : 30px;
-  height : 30px;
-  margin-left:15px;
+  width: 30px;
+  height: 30px;
+  margin-left: 15px;
   background-image: url("./img/micStart.svg");
   background-repeat: no-repeat;
-  background-size : contain;
+  background-size: contain;
 }
 /*녹음중단*/
-#recordStopBtn{
-  width : 30px;
-  height : 30px;
-  margin-left:15px;
+#recordStopBtn {
+  width: 30px;
+  height: 30px;
+  margin-left: 15px;
   background-image: url("./img/micOff.svg");
   background-repeat: no-repeat;
-  background-size : contain;
+  background-size: contain;
 }
